@@ -1,9 +1,9 @@
 package uk.co.swilson.advent;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import uk.co.swilson.advent.day01.Day01;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class Day01Test {
     private static final String EXAMPLE_INPUT = "1721\n" +
@@ -17,13 +17,13 @@ public class Day01Test {
     public void example() {
         var solver = new Day01();
         var result = solver.solvePartOne(EXAMPLE_INPUT);
-        assertEquals(514579, result);
+        assertThat(result).isEqualTo(514579);
     }
 
     @Test
     public void partTwoExample() {
         var solver = new Day01();
         var result = solver.solvePartTwo(EXAMPLE_INPUT);
-        assertEquals(241861950, result);
+        assertThat(result).isEqualTo(241861950);
     }
 }
