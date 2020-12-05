@@ -10,15 +10,17 @@ public class Day05 implements Solver {
     }
 
     public int seatID(String input) {
-        var rowBits = stringToBinary(input.substring(0, 7), 'F', 'B');
-        var colBits = stringToBinary(input.substring(7, 10), 'L', 'R');
-        var row = Integer.parseInt(rowBits, 2);
-        var col = Integer.parseInt(colBits, 2);
+        var row = stringToBinary(input.substring(0, 7), 'F', 'B');
+        var col = stringToBinary(input.substring(7, 10), 'L', 'R');
         return row * 8 + col;
     }
 
-    private String stringToBinary(String input, char zero, char one) {
-        return input.chars().mapToObj(c -> c == zero ? "0" : "1").collect(Collectors.joining());
+    private int stringToBinary(String input, char zero, char one) {
+        return Integer.parseInt(
+                input.chars()
+                    .mapToObj(c -> c == zero ? "0" : "1")
+                    .collect(Collectors.joining()),
+                2);
     }
 
     public int solvePartTwo(String input) {
