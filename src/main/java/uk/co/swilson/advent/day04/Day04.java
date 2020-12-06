@@ -10,14 +10,14 @@ public class Day04 implements Solver {
     private static final List<String> VALID_ECL_LIST = Lists.newArrayList("amb", "blu", "brn", "gry", "grn", "hzl", "oth");
 
     public int solvePartOne(String input) {
-        var passports = input.split("\r\n\r\n");
+        var passports = input.split("\r?\n\r?\n");
         return (int) Arrays.stream(passports)
                 .map(passport -> passport.split("\\s+"))
-                .filter(this::passportHasAllRequiredFields)
+                .filter(this::allRequiredFieldsArePresent)
                 .count();
     }
 
-    private boolean passportHasAllRequiredFields(String[] fields) {
+    private boolean allRequiredFieldsArePresent(String[] fields) {
         if (fields.length == 7) {
             // If CID is here, something else is missing
             return !Arrays.stream(fields).anyMatch(f -> f.startsWith("cid"));
@@ -26,7 +26,7 @@ public class Day04 implements Solver {
     }
 
     public int solvePartTwo(String input) {
-        var passports = input.split("\r\n\r\n");
+        var passports = input.split("\r?\n\r?\n");
         return (int) Arrays.stream(passports)
                 .filter(this::passportIsValid)
                 .count();
@@ -35,7 +35,7 @@ public class Day04 implements Solver {
     public boolean passportIsValid(String passport) {
         var fields = passport.split("\\s+");
 
-        if (!passportHasAllRequiredFields(fields)) {
+        if (!allRequiredFieldsArePresent(fields)) {
             return false;
         }
 
