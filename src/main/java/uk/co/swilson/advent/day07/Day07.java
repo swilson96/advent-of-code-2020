@@ -10,23 +10,23 @@ public class Day07 implements Solver {
     private static final String MY_BAG = "shiny gold";
 
     public int solvePartOne(String input) {
-        Map<String, List<String>> toParents = new HashMap<String, List<String>>();
+        Map<String, List<String>> possibleParentsOf = new HashMap<>();
         input.lines().map(Rule::new)
                 .forEach(rule -> {
                     for (var child : rule.children) {
-                        toParents.putIfAbsent(child, Lists.newArrayList());
-                        toParents.get(child).add(rule.parent);
+                        possibleParentsOf.putIfAbsent(child.name, Lists.newArrayList());
+                        possibleParentsOf.get(child.name).add(rule.parent);
                     }
                 });
 
-        Set<String> possibleParents = new HashSet<String>();
-        possibleParents.addAll(toParents.get(MY_BAG));
+        Set<String> possibleParents = new HashSet<>();
+        possibleParents.addAll(possibleParentsOf.get(MY_BAG));
 
         var increased = true;
         while (increased) {
             var originalSize = possibleParents.size();
             var newParents = possibleParents.stream()
-                    .map(p -> toParents.getOrDefault(p, Lists.newArrayList()))
+                    .map(p -> possibleParentsOf.getOrDefault(p, Lists.newArrayList()))
                     .flatMap(ps -> ps.stream())
                     .collect(Collectors.toSet());
             possibleParents.addAll(newParents);
@@ -37,6 +37,7 @@ public class Day07 implements Solver {
     }
 
     public int solvePartTwo(String input) {
-        return 0;
+        var iterator = new BagIterator(input);
+        return iterator.countBagsInSingleBag(MY_BAG);
     }
 }
