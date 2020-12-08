@@ -28,6 +28,6 @@ public class Day08Test {
     public void partTwoExample() {
         var solver = new Day08();
         var result = solver.solvePartTwo(EXAMPLE_INPUT);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(8);
     }
 }
