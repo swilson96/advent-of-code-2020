@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Day07 implements Solver {
     private static final String MY_BAG = "shiny gold";
 
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         Map<String, List<String>> possibleParentsOf = new HashMap<>();
         input.lines().map(Rule::new)
                 .forEach(rule -> {
@@ -36,7 +36,7 @@ public class Day07 implements Solver {
         return possibleParents.size();
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         var iterator = new BagIterator(input);
         return iterator.countBagsInSingleBag(MY_BAG);
     }

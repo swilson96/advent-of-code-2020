@@ -9,11 +9,11 @@ public class Day06 implements Solver {
 
     public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         return countQuestionsMatching(input, this::countUnionQuestionsInGroup);
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         return countQuestionsMatching(input, this::countIntersectionQuestionsInGroup);
     }
 

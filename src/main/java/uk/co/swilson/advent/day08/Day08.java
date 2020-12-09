@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Day08 implements Solver {
     private int acc = 0;
 
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         var lines = input.lines().collect(Collectors.toList());
         var currentIndex = 0;
         var usedIndices = new HashSet<Integer>();
@@ -23,7 +23,7 @@ public class Day08 implements Solver {
         return acc;
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         var instructions = input.lines()
                 .map(Instruction::new)
                 .collect(Collectors.toList());

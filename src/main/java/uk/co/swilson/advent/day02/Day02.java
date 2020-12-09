@@ -3,7 +3,7 @@ package uk.co.swilson.advent.day02;
 import uk.co.swilson.advent.Solver;
 
 public class Day02 implements Solver {
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         return (int) input.lines()
                 .map(s -> s.split(": "))
                 .filter(entry -> {
@@ -16,7 +16,7 @@ public class Day02 implements Solver {
                 .count();
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         return (int) input.lines()
                 .map(s -> s.split(": "))
                 .filter(entry -> {

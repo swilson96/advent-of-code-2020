@@ -5,7 +5,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.stream.Collectors;
 
 public class Day01 implements Solver {
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         var expenses = input.lines()
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
@@ -23,7 +23,7 @@ public class Day01 implements Solver {
         return 0;
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         var expenses = input.lines()
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());

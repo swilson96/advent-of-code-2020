@@ -5,7 +5,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.stream.Collectors;
 
 public class Day05 implements Solver {
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         return input.lines().mapToInt(this::seatID).max().orElse(-1);
     }
 
@@ -23,7 +23,7 @@ public class Day05 implements Solver {
                 2);
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         var allKnownSeats = input.lines().map(this::seatID).sorted().collect(Collectors.toList());
         int prev = -3;
         for (int seatID : allKnownSeats) {

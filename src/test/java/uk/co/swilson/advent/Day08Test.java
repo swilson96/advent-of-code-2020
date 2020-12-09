@@ -2,7 +2,6 @@ package uk.co.swilson.advent;
 
 import org.junit.jupiter.api.Test;
 import uk.co.swilson.advent.day08.Day08;
-import uk.co.swilson.advent.dayXX.DayXX;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 

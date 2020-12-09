@@ -9,7 +9,7 @@ import java.util.List;
 public class Day04 implements Solver {
     private static final List<String> VALID_ECL_LIST = Lists.newArrayList("amb", "blu", "brn", "gry", "grn", "hzl", "oth");
 
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         var passports = input.split("\r?\n\r?\n");
         return (int) Arrays.stream(passports)
                 .map(passport -> passport.split("\\s+"))
@@ -25,7 +25,7 @@ public class Day04 implements Solver {
         return fields.length == 8;
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         var passports = input.split("\r?\n\r?\n");
         return (int) Arrays.stream(passports)
                 .filter(this::passportIsValid)

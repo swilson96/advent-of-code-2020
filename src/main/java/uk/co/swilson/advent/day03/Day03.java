@@ -25,11 +25,11 @@ public class Day03 implements Solver {
         return trees;
     }
 
-    public int solvePartOne(String input) {
+    public long solvePartOne(String input) {
         return checkSlope(input,3, 1);
     }
 
-    public int solvePartTwo(String input) {
+    public long solvePartTwo(String input) {
         List<Integer[]> slopes = Lists.newArrayList();
         slopes.add(new Integer[] { 1, 1});
         slopes.add(new Integer[] { 3, 1});
