@@ -96,6 +96,41 @@ public class Day10Test {
     public void partTwoExample() {
         var solver = new Day10();
         var result = solver.solvePartTwo(EXAMPLE_INPUT_1);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(8);
+    }
+
+    @Test
+    public void partTwoLongerExample() {
+        var solver = new Day10();
+        var result = solver.solvePartTwo(EXAMPLE_INPUT_2);
+        assertThat(result).isEqualTo(19208);
+    }
+
+    @Test
+    public void noAdaptorsPartTwo() {
+        var solver = new Day10();
+        var result = solver.solvePartTwo("");
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void oneAdaptorPartTwo() {
+        var solver = new Day10();
+        var result = solver.solvePartTwo("3");
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void twoAdaptorsPartTwo() {
+        var solver = new Day10();
+        var result = solver.solvePartTwo("6\n3");
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void threeAdaptorsPartTwo() {
+        var solver = new Day10();
+        var result = solver.solvePartTwo("2\n6\n3");
+        assertThat(result).isEqualTo(2);
     }
 }
