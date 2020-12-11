@@ -6,6 +6,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day10 implements Solver {
     public long solvePartOne(String input) {
@@ -33,7 +34,7 @@ public class Day10 implements Solver {
     }
 
     public long solvePartTwo(String input) {
-        String jumps = inputToJumps(input).stream().map(i -> i.toString()).collect(Collectors.joining());
+        String jumps = inputToJumps(input).stream().map(Object::toString).collect(Collectors.joining());
         return countValidSubsets(jumps);
     }
 
@@ -48,11 +49,10 @@ public class Day10 implements Solver {
         if (jumps.length() < 2) {
             return 1;
         }
-        var variations = new String[] {
+        return Stream.of(
                 (Integer.parseInt(jumps.substring(0, 1)) + Integer.parseInt(jumps.substring(1, 2))) + jumps.substring(2),
                 jumps.substring(1)
-        };
-        return Arrays.stream(variations)
+        )
                 .mapToLong(this::countValidSubsets)
                 .sum();
     }

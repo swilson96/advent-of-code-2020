@@ -1,7 +1,11 @@
 package uk.co.swilson.advent;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import uk.co.swilson.advent.day10.Day10;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -50,87 +54,41 @@ public class Day10Test {
             "10\n" +
             "3";
 
-    @Test
-    public void example() {
-        var solver = new Day10();
-        var result = solver.solvePartOne(EXAMPLE_INPUT_1);
-        assertThat(result).isEqualTo(35);
+    public static Stream<? extends Arguments> partOneArguments() {
+        return Stream.of(
+                Arguments.of(EXAMPLE_INPUT_1, 35),
+                Arguments.of(EXAMPLE_INPUT_2, 220),
+                Arguments.of("", 0),
+                Arguments.of("3", 0),
+                Arguments.of("6\n3", 0),
+                Arguments.of("2\n6\n3", 2)
+        );
     }
 
-    @Test
-    public void longerExample() {
-        var solver = new Day10();
-        var result = solver.solvePartOne(EXAMPLE_INPUT_2);
-        assertThat(result).isEqualTo(220);
+    public static Stream<? extends Arguments> partTwoArguments() {
+        return Stream.of(
+                Arguments.of(EXAMPLE_INPUT_1, 8),
+                Arguments.of(EXAMPLE_INPUT_2, 19208),
+                Arguments.of("", 1),
+                Arguments.of("3", 1),
+                Arguments.of("6\n3", 1),
+                Arguments.of("2\n6\n3", 2)
+        );
     }
 
-    @Test
-    public void noAdaptors() {
+    @ParameterizedTest
+    @MethodSource("partOneArguments")
+    public void testPartOne(String input, long expected) {
         var solver = new Day10();
-        var result = solver.solvePartOne("");
-        assertThat(result).isEqualTo(0);
+        var result = solver.solvePartOne(input);
+        assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    public void oneAdaptor() {
+    @ParameterizedTest
+    @MethodSource("partTwoArguments")
+    public void testPartTwo(String input, long expected) {
         var solver = new Day10();
-        var result = solver.solvePartOne("3");
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void twoAdaptors() {
-        var solver = new Day10();
-        var result = solver.solvePartOne("6\n3");
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void threeAdaptors() {
-        var solver = new Day10();
-        var result = solver.solvePartOne("2\n6\n3");
-        assertThat(result).isEqualTo(2);
-    }
-
-    @Test
-    public void partTwoExample() {
-        var solver = new Day10();
-        var result = solver.solvePartTwo(EXAMPLE_INPUT_1);
-        assertThat(result).isEqualTo(8);
-    }
-
-    @Test
-    public void partTwoLongerExample() {
-        var solver = new Day10();
-        var result = solver.solvePartTwo(EXAMPLE_INPUT_2);
-        assertThat(result).isEqualTo(19208);
-    }
-
-    @Test
-    public void noAdaptorsPartTwo() {
-        var solver = new Day10();
-        var result = solver.solvePartTwo("");
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void oneAdaptorPartTwo() {
-        var solver = new Day10();
-        var result = solver.solvePartTwo("3");
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void twoAdaptorsPartTwo() {
-        var solver = new Day10();
-        var result = solver.solvePartTwo("6\n3");
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void threeAdaptorsPartTwo() {
-        var solver = new Day10();
-        var result = solver.solvePartTwo("2\n6\n3");
-        assertThat(result).isEqualTo(2);
+        var result = solver.solvePartTwo(input);
+        assertThat(result).isEqualTo(expected);
     }
 }
