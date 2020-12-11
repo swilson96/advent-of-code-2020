@@ -42,6 +42,11 @@ public class App {
         if (now.getMonth() == Month.DECEMBER && now.getDayOfMonth() <= 25) {
             if (now.getDayOfMonth() == 25) {
                 System.out.println("Merry Christmas!");
+            } else {
+                System.out.println(String.format(
+                        "Only %d day%s until Christmas!",
+                        25 - now.getDayOfMonth(),
+                        now.getDayOfMonth() == 24 ? "" : "s"));
             }
             return String.format("%02d", now.getDayOfMonth());
         }
