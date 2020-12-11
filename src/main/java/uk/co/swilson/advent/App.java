@@ -3,16 +3,16 @@
  */
 package uk.co.swilson.advent;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class App {
     private static SolverFactory solverFactory = new SolverFactory();
 
     public static void main(String[] args) {
-        System.out.println(args);
-        if (args.length > 0) {
-            var day = args[0];
+        String day = getDay(args);
+        if (day != null) {
             System.out.println("Running day " + day);
             try {
                 InputStream is  = App.class.getClassLoader().getResourceAsStream("input" + day + ".txt");
@@ -30,7 +30,21 @@ public class App {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Specify a day to run");
+            System.out.println("Specify a day to run, or run during advent");
         }
+    }
+
+    private static String getDay(String[] args) {
+        if (args.length > 0) {
+            return args[0];
+        }
+        var now = LocalDate.now();
+        if (now.getMonth() == Month.DECEMBER && now.getDayOfMonth() <= 25) {
+            if (now.getDayOfMonth() == 25) {
+                System.out.println("Merry Christmas!");
+            }
+            return String.format("%02d", now.getDayOfMonth());
+        }
+        return null;
     }
 }
