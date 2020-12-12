@@ -4,14 +4,17 @@ import uk.co.swilson.advent.Solver;
 
 public class Day12 implements Solver {
     public long solvePartOne(String input) {
-        Navigator navigator = new Navigator();
+        Navigator navigator = new Navigator(new Ship(Vector.EAST, Vector.ORIGIN));
         input.lines().map(Instruction::new)
-                .forEach(i -> navigator.processInstruction(i));
+                .forEach(navigator::processPartOneInstruction);
         return navigator.distanceFromOrigin();
     }
 
     public long solvePartTwo(String input) {
-        return 0;
+        Navigator navigator = new Navigator(new Ship(new Vector(10, 1), Vector.ORIGIN));
+        input.lines().map(Instruction::new)
+                .forEach(navigator::processPartTwoInstruction);
+        return navigator.distanceFromOrigin();
     }
 }
 

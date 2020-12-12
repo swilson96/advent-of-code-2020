@@ -21,14 +21,18 @@ public class Vector {
         return new Vector(this.x + other.x, this.y + other.y);
     }
 
+    public Vector subtract(Vector other) {
+        return new Vector(this.x - other.x, this.y - other.y);
+    }
+
     public Vector multiply(int factor) {
         return new Vector(x * factor, y * factor);
     }
 
-    public Vector rotateClockwise(int turns) {
-        turns = turns % 4 + 4;
+    public Vector rotateClockwise(int quarterTurns) {
+        quarterTurns = quarterTurns % 4 + 4;
         var result = this;
-        for (int i = 0; i < turns; ++i) {
+        for (int i = 0; i < quarterTurns; ++i) {
             result = result.rotateClockwise();
         }
         return result;
@@ -36,6 +40,15 @@ public class Vector {
 
     public Vector rotateClockwise() {
         return new Vector(y, -x);
+    }
+
+    Vector rotateClockwise(Vector about, int quarterTurns) {
+        // translate
+        Vector result = this.subtract(about);
+        // rotate
+        result = result.rotateClockwise(quarterTurns);
+        // translate back
+        return result.add(about);
     }
 
     public String toString() {
