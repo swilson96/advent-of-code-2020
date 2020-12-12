@@ -60,8 +60,8 @@ public class Day11 implements Solver {
         return next.toArray(String[][]::new);
     }
 
-    public long countOccupiedSeats(String[][] original) {
-        return Arrays.stream(original)
+    public long countOccupiedSeats(String[][] map) {
+        return Arrays.stream(map)
                 .flatMap(Arrays::stream)
                 .filter(seat -> seat.equals("#"))
                 .count();
