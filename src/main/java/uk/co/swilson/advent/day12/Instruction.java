@@ -16,44 +16,28 @@ public class Instruction {
     }
 
     public Ship actAsPerPartOne(Ship original) {
-        switch (type) {
-            case "F":
-                return new Ship(original.direction, original.position.add(original.direction.multiply(amount)));
-            case "R":
-                return new Ship(original.direction.rotateClockwise(amount / 90), original.position);
-            case "L":
-                return new Ship(original.direction.rotateClockwise(-1 * (amount / 90)), original.position);
-            case "N":
-                return new Ship(original.direction, original.position.add(Vector.NORTH.multiply(amount)));
-            case "E":
-                return new Ship(original.direction, original.position.add(Vector.EAST.multiply(amount)));
-            case "S":
-                return new Ship(original.direction, original.position.add(Vector.SOUTH.multiply(amount)));
-            case "W":
-                return new Ship(original.direction, original.position.add(Vector.WEST.multiply(amount)));
-            default:
-                throw new RuntimeException("unknown instruction " + type);
-        }
+        return switch (type) {
+            case "F" -> new Ship(original.direction, original.position.add(original.direction.multiply(amount)));
+            case "R" -> new Ship(original.direction.rotateClockwise(amount / 90), original.position);
+            case "L" -> new Ship(original.direction.rotateClockwise(-1 * (amount / 90)), original.position);
+            case "N" -> new Ship(original.direction, original.position.add(Vector.NORTH.multiply(amount)));
+            case "E" -> new Ship(original.direction, original.position.add(Vector.EAST.multiply(amount)));
+            case "S" -> new Ship(original.direction, original.position.add(Vector.SOUTH.multiply(amount)));
+            case "W" -> new Ship(original.direction, original.position.add(Vector.WEST.multiply(amount)));
+            default -> throw new RuntimeException("unknown instruction " + type);
+        };
     }
 
     public Ship actAsPerPartTwo(Ship original) {
-        switch (type) {
-            case "F":
-                return new Ship(original.direction, original.position.add(original.direction.multiply(amount)));
-            case "R":
-                return new Ship(original.direction.rotateClockwise(amount / 90), original.position);
-            case "L":
-                return new Ship(original.direction.rotateClockwise(-1 * (amount / 90)), original.position);
-            case "N":
-                return new Ship(original.direction.add(Vector.NORTH.multiply(amount)), original.position);
-            case "E":
-                return new Ship(original.direction.add(Vector.EAST.multiply(amount)), original.position);
-            case "S":
-                return new Ship(original.direction.add(Vector.SOUTH.multiply(amount)), original.position);
-            case "W":
-                return new Ship(original.direction.add(Vector.WEST.multiply(amount)), original.position);
-            default:
-                throw new RuntimeException("unknown instruction " + type);
-        }
+        return switch (type) {
+            case "F" -> new Ship(original.direction, original.position.add(original.direction.multiply(amount)));
+            case "R" -> new Ship(original.direction.rotateClockwise(amount / 90), original.position);
+            case "L" -> new Ship(original.direction.rotateClockwise(-1 * (amount / 90)), original.position);
+            case "N" -> new Ship(original.direction.add(Vector.NORTH.multiply(amount)), original.position);
+            case "E" -> new Ship(original.direction.add(Vector.EAST.multiply(amount)), original.position);
+            case "S" -> new Ship(original.direction.add(Vector.SOUTH.multiply(amount)), original.position);
+            case "W" -> new Ship(original.direction.add(Vector.WEST.multiply(amount)), original.position);
+            default -> throw new RuntimeException("unknown instruction " + type);
+        };
     }
 }
