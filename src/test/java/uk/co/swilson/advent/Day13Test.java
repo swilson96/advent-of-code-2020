@@ -26,32 +26,23 @@ public class Day13Test {
     public void partTwoExample() {
         var solver = new Day13();
         var result = solver.solvePartTwo(EXAMPLE_INPUT);
-        assertThat(result).isEqualTo(0);
-    }
-
-    public static Stream<? extends Arguments> partOneArguments() {
-        return Stream.of(
-                Arguments.of(EXAMPLE_INPUT, 295)
-        );
+        assertThat(result).isEqualTo(1068781);
     }
 
     public static Stream<? extends Arguments> partTwoArguments() {
         return Stream.of(
-                Arguments.of(EXAMPLE_INPUT, 0)
+                Arguments.of("17,x,13,19", 3417),
+                Arguments.of("67,7,59,61", 754018),
+                Arguments.of("67,x,7,59,61", 779210),
+                Arguments.of("67,7,x,59,61", 1261476),
+                Arguments.of("1789,37,47,1889", 1202161486)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("partOneArguments")
-    public void testPartOne(String input, long expected) {
-        var solver = new Day13();
-        var result = solver.solvePartOne(input);
-        AssertionsForClassTypes.assertThat(result).isEqualTo(expected);
-    }
-
-    @ParameterizedTest
     @MethodSource("partTwoArguments")
-    public void testPartTwo(String input, long expected) {
+    public void testPartTwo(String schedule, long expected) {
+        var input = "939\n" + schedule;
         var solver = new Day13();
         var result = solver.solvePartTwo(input);
         AssertionsForClassTypes.assertThat(result).isEqualTo(expected);
