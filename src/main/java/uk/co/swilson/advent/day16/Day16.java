@@ -4,13 +4,17 @@ import com.google.common.collect.Lists;
 import uk.co.swilson.advent.Solver;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Day16 implements Solver {
-    private static Pattern RULE_MATCHER = Pattern.compile(": (\\d+)-(\\d+) or (\\d+)-(\\d+)\\r?\\n");
+    private static final Pattern RULE_MATCHER = Pattern.compile("(\\n|^)([\\S ]+): (\\d+)-(\\d+) or (\\d+)-(\\d+)");
+    private static final Pattern MY_TICKET_MATCHER = Pattern.compile("your ticket:\\r?\\n([\\d,]+)\\r?\\n");
 
     public long solvePartOne(String input) {
         var rules = getRules(input);
@@ -25,12 +29,11 @@ public class Day16 implements Solver {
     private Stream<Integer> invalidFields(int[] ticket, List<Rule> rules) {
         return Arrays.stream(ticket)
                 .filter(v -> !rules.stream().anyMatch(r -> r.matches(v)))
-                .mapToObj(i -> i);
+                .boxed();
     }
 
     private boolean ticketIsValid(int[] ticket, List<Rule> rules) {
-        return Arrays.stream(ticket)
-                .allMatch(v -> rules.stream().anyMatch(r -> r.matches(v)));
+        return invalidFields(ticket, rules).findAny().isEmpty();
     }
 
     private List<Rule> getRules(String input) {
@@ -38,10 +41,11 @@ public class Day16 implements Solver {
         List<Rule> ret = Lists.newArrayList();
         while (matcher.find()) {
             ret.add(new Rule(
-                    Integer.parseInt(matcher.group(1)),
-                    Integer.parseInt(matcher.group(2)),
+                    matcher.group(2),
                     Integer.parseInt(matcher.group(3)),
-                    Integer.parseInt(matcher.group(4))
+                    Integer.parseInt(matcher.group(4)),
+                    Integer.parseInt(matcher.group(5)),
+                    Integer.parseInt(matcher.group(6))
             ));
         }
         return ret;
@@ -54,16 +58,44 @@ public class Day16 implements Solver {
     }
 
     public long solvePartTwo(String input) {
-        return 0;
+        var rules = getRules(input);
+        var tickets = otherTickets(input).stream().filter(t -> ticketIsValid(t, rules)).collect(Collectors.toList());
+
+        var myTicketMatcher = MY_TICKET_MATCHER.matcher(input);
+        myTicketMatcher.find();
+        var myTicket = Arrays.stream(myTicketMatcher.group(1).split(",")).mapToInt(Integer::parseInt).toArray();
+
+        Map<String, Integer> ruleToField = new HashMap<>();
+        while (ruleToField.size() < rules.size()) {
+            for (var rule : rules) {
+                if (ruleToField.containsKey(rule.name)) {
+                    continue;
+                }
+                var possibleFields = IntStream.range(0, rules.size())
+                        .filter(i -> !ruleToField.containsValue(i))
+                        .filter(i -> tickets.stream().mapToInt(t -> t[i]).allMatch(rule::matches))
+                        .toArray();
+                if (possibleFields.length == 1) {
+                    ruleToField.put(rule.name, possibleFields[0]);
+                }
+            }
+        }
+
+        return ruleToField.entrySet().stream()
+                .filter(e -> e.getKey().startsWith("departure"))
+                .mapToLong(e -> myTicket[e.getValue()])
+                .reduce(1, (a, b) -> a * b);
     }
 
-    private class Rule {
+    private static class Rule {
+        public final String name;
         private final int a1;
         private final int a2;
         private final int b1;
         private final int b2;
 
-        public Rule(int a1, int a2, int b1, int b2) {
+        public Rule(String name, int a1, int a2, int b1, int b2) {
+            this.name = name;
             this.a1 = a1;
             this.a2 = a2;
             this.b1 = b1;
