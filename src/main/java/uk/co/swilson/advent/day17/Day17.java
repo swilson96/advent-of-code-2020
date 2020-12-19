@@ -27,7 +27,7 @@ public class Day17 implements Solver {
             for (int y = -1; y <= prev.max.y + 1; ++y) {
                 for (int z = -1; z <= prev.max.z + 1; ++z) {
                     var activeNeighbours = neighboursIncludingSelfInThreeDimensions(x, y, z)
-                            .filter(v -> prev.isActive(v.x, v.y, v.z, 0))
+                            .filter(v -> prev.isActive(v.x, v.y, v.z, v.w))
                             .count();
                     var wasActive = prev.isActive(x, y, z, 0);
                     if (wasActive) {
@@ -97,6 +97,43 @@ public class Day17 implements Solver {
     }
 
     public long solvePartTwo(String input) {
-        return 0;
+        Set<ConwayCube> initialCubes = parseInput(input);
+        PocketDimension dimension = new PocketDimension(initialCubes);
+
+        var cycle = 1;
+        while (cycle <= 6) {
+            dimension = iterateInFourDimensions(dimension);
+            ++cycle;
+        }
+
+        return dimension.numActive();
+    }
+
+    private PocketDimension iterateInFourDimensions(PocketDimension prev) {
+        Set<ConwayCube> cubes = new HashSet<>();
+        for (int x = -1; x <= prev.max.x + 1; ++x) {
+            for (int y = -1; y <= prev.max.y + 1; ++y) {
+                for (int z = -1; z <= prev.max.z + 1; ++z) {
+                    for (int w = -1; w <= prev.max.w + 1; ++w) {
+                        var activeNeighbours = neighboursIncludingSelfInFourDimensions(x, y, z, w)
+                                .filter(v -> prev.isActive(v.x, v.y, v.z, v.w))
+                                .count();
+                        var wasActive = prev.isActive(x, y, z, w);
+                        if (wasActive) {
+                            --activeNeighbours;
+                        }
+                        var isActive = false;
+                        if (wasActive && (activeNeighbours == 2 || activeNeighbours == 3)) {
+                            isActive = true;
+                        }
+                        if (!wasActive && activeNeighbours == 3) {
+                            isActive = true;
+                        }
+                        cubes.add(new ConwayCube(x, y, z, w, isActive));
+                    }
+                }
+            }
+        }
+        return new PocketDimension(cubes);
     }
 }

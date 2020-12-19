@@ -1,16 +1,9 @@
 package uk.co.swilson.advent;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import uk.co.swilson.advent.day11.Day11;
 import uk.co.swilson.advent.day17.Day17;
 
 import java.io.InputStream;
-import java.rmi.server.ExportException;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -39,6 +32,6 @@ public class Day17Test {
     public void partTwoExample() {
         var solver = new Day17();
         var result = solver.solvePartTwo(EXAMPLE_INPUT);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(848);
     }
 }
