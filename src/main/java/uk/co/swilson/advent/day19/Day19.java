@@ -102,11 +102,11 @@ public class Day19 implements Solver {
     }
 
     private boolean messageMatchesNewRuleEleven(String message, Map<String, Set<String>> cache) {
-        // 42 31 | 42 11 31
+        // 11: 42 31 | 42 11 31
         for (var head : cache.get("42")) {
             if (message.startsWith(head)) {
+                var withoutHead = message.substring(head.length());
                 for (var tail : cache.get("31")) {
-                    var withoutHead = message.substring(head.length());
                     if (withoutHead.endsWith(tail)) {
                         var remainder = withoutHead.substring(0, withoutHead.length() - tail.length());
                         if (remainder.isEmpty()) {
