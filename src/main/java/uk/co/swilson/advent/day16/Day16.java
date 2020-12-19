@@ -58,12 +58,9 @@ public class Day16 implements Solver {
     }
 
     public long solvePartTwo(String input) {
-        var rules = getRules(input);
-        var tickets = otherTickets(input).stream().filter(t -> ticketIsValid(t, rules)).collect(Collectors.toList());
-
-        var myTicketMatcher = MY_TICKET_MATCHER.matcher(input);
-        myTicketMatcher.find();
-        var myTicket = Arrays.stream(myTicketMatcher.group(1).split(",")).mapToInt(Integer::parseInt).toArray();
+        List<Rule> rules = getRules(input);
+        List<int[]> tickets = otherTickets(input).stream().filter(t -> ticketIsValid(t, rules)).collect(Collectors.toList());
+        int[] myTicket = getMyTicket(input);
 
         Map<String, Integer> ruleToField = new HashMap<>();
         while (ruleToField.size() < rules.size()) {
@@ -85,6 +82,12 @@ public class Day16 implements Solver {
                 .filter(e -> e.getKey().startsWith("departure"))
                 .mapToLong(e -> myTicket[e.getValue()])
                 .reduce(1, (a, b) -> a * b);
+    }
+
+    private int[] getMyTicket(String input) {
+        var myTicketMatcher = MY_TICKET_MATCHER.matcher(input);
+        myTicketMatcher.find();
+        return Arrays.stream(myTicketMatcher.group(1).split(",")).mapToInt(Integer::parseInt).toArray();
     }
 
     private static class Rule {
