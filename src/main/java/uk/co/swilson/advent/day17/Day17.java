@@ -26,10 +26,10 @@ public class Day17 implements Solver {
         for (int x = -1; x <= prev.max.x + 1; ++x) {
             for (int y = -1; y <= prev.max.y + 1; ++y) {
                 for (int z = -1; z <= prev.max.z + 1; ++z) {
-                    var activeNeighbours = neighboursIncludingSelf(x, y, z)
-                            .filter(v -> prev.isActive(v.x, v.y, v.z))
+                    var activeNeighbours = neighboursIncludingSelfInThreeDimensions(x, y, z)
+                            .filter(v -> prev.isActive(v.x, v.y, v.z, 0))
                             .count();
-                    var wasActive = prev.isActive(x, y, z);
+                    var wasActive = prev.isActive(x, y, z, 0);
                     if (wasActive) {
                         --activeNeighbours;
                     }
@@ -40,36 +40,55 @@ public class Day17 implements Solver {
                     if (!wasActive && activeNeighbours == 3) {
                         isActive = true;
                     }
-                    cubes.add(new ConwayCube(x, y, z, isActive));
+                    cubes.add(new ConwayCube(x, y, z, 0, isActive));
                 }
             }
         }
         return new PocketDimension(cubes);
     }
 
-    private Stream<GridVector> neighboursIncludingSelf(int x, int y, int z) {
+    private Stream<GridVector> neighboursIncludingSelfInThreeDimensions(int x, int y, int z) {
         return Stream.of(x - 1, x, x + 1)
-                .flatMap(xin -> Stream.of(new Point(xin, y - 1), new Point(xin, y), new Point(xin, y + 1)))
-                .flatMap(p -> Stream.of(new GridVector(p.x, p.y, z - 1), new GridVector(p.x, p.y, z), new GridVector(p.x, p.y, z + 1)));
+                .flatMap(xin -> Stream.of(new TwoPoint(xin, y - 1), new TwoPoint(xin, y), new TwoPoint(xin, y + 1)))
+                .flatMap(p -> Stream.of(new GridVector(p.x, p.y, z - 1, 0), new GridVector(p.x, p.y, z, 0), new GridVector(p.x, p.y, z + 1, 0)));
     }
 
-    private class Point {
+    private Stream<GridVector> neighboursIncludingSelfInFourDimensions(int x, int y, int z, int w) {
+        return Stream.of(x - 1, x, x + 1)
+                .flatMap(xin -> Stream.of(new TwoPoint(xin, y - 1), new TwoPoint(xin, y), new TwoPoint(xin, y + 1)))
+                .flatMap(p -> Stream.of(new ThreePoint(p.x, p.y, z - 1), new ThreePoint(p.x, p.y, z), new ThreePoint(p.x, p.y, z + 1)))
+                .flatMap(p -> Stream.of(new GridVector(p.x, p.y, p.z, w - 1), new GridVector(p.x, p.y, p.z, w), new GridVector(p.x, p.y, p.z, w + 1)));
+    }
+
+    private class TwoPoint {
         private final int x;
         private final int y;
-        public Point(int x, int y) {
+        public TwoPoint(int x, int y) {
             this.x = x;
             this.y = y;
         }
     }
 
+    private class ThreePoint {
+        private final int x;
+        private final int y;
+        private final int z;
+        public ThreePoint(int x, int y, int z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
+
     private Set<ConwayCube> parseInput(String input) {
         final var z = 0;
+        final var w = 0;
         var y = 0;
         Set<ConwayCube> result = new HashSet<>();
         for (var line : input.lines().collect(Collectors.toList())) {
             var x = 0;
             for (var c : line.split("")) {
-                result.add(new ConwayCube(x, y, z, "#".equals(c)));
+                result.add(new ConwayCube(x, y, z, w, "#".equals(c)));
                 ++x;
             }
             ++y;
