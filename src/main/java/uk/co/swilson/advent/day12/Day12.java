@@ -2,7 +2,7 @@ package uk.co.swilson.advent.day12;
 
 import uk.co.swilson.advent.Solver;
 
-public class Day12 implements Solver {
+public class Day12 extends Solver {
     public long solvePartOne(String input) {
         Navigator navigator = new Navigator(new Ship(Vector.EAST, Vector.ORIGIN));
         input.lines().map(Instruction::new)

@@ -5,7 +5,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.Arrays;
 import java.util.function.ToIntFunction;
 
-public class Day06 implements Solver {
+public class Day06 extends Solver {
 
     public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 

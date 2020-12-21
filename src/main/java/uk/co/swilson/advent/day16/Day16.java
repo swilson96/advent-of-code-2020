@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Day16 implements Solver {
+public class Day16 extends Solver {
     private static final Pattern RULE_MATCHER = Pattern.compile("(\\n|^)([\\S ]+): (\\d+)-(\\d+) or (\\d+)-(\\d+)");
     private static final Pattern MY_TICKET_MATCHER = Pattern.compile("your ticket:\\r?\\n([\\d,]+)\\r?\\n");
 

@@ -4,7 +4,7 @@ import uk.co.swilson.advent.Solver;
 
 import java.util.HashMap;
 
-public class Day15 implements Solver {
+public class Day15 extends Solver {
     public long solvePartOne(String input) {
         return getNthTurn(input, 2020);
     }

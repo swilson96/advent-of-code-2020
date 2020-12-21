@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Day19 implements Solver {
+public class Day19 extends Solver {
 
     public long solvePartOne(String input) {
         var bits = input.split("\r?\n\r?\n");

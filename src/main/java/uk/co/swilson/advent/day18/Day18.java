@@ -5,7 +5,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
-public class Day18 implements Solver {
+public class Day18 extends Solver {
     public long solvePartOne(String input) {
         return input.lines()
                 .mapToLong(expression -> new Calculator().evaluate(expression))

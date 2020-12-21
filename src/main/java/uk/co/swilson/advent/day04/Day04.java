@@ -6,7 +6,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.Arrays;
 import java.util.List;
 
-public class Day04 implements Solver {
+public class Day04 extends Solver {
     private static final List<String> VALID_ECL_LIST = Lists.newArrayList("amb", "blu", "brn", "gry", "grn", "hzl", "oth");
 
     public long solvePartOne(String input) {

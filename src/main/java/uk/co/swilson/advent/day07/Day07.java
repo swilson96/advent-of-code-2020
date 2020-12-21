@@ -6,7 +6,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Day07 implements Solver {
+public class Day07 extends Solver {
     private static final String MY_BAG = "shiny gold";
 
     public long solvePartOne(String input) {

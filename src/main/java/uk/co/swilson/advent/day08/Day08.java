@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Day08 implements Solver {
+public class Day08 extends Solver {
     private int acc = 0;
 
     public long solvePartOne(String input) {

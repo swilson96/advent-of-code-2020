@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Day10 implements Solver {
+public class Day10 extends Solver {
     public long solvePartOne(String input) {
         var jumps = inputToJumps(input);
 

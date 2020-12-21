@@ -19,11 +19,11 @@ public class App {
                 var input = new String(is.readAllBytes());
                 var solver = solverFactory.forDay(day);
 
-                var resultPartOne = solver.solvePartOne(input);
+                var resultPartOne = solver.solvePartOneToString(input);
                 System.out.println("Part 1:");
                 System.out.println(resultPartOne);
 
-                var resultPartTwo = solver.solvePartTwo(input);
+                var resultPartTwo = solver.solvePartTwoToString(input);
                 System.out.println("Part 2:");
                 System.out.println(resultPartTwo);
             } catch (Exception e) {

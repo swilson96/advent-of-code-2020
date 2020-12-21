@@ -4,7 +4,7 @@ import uk.co.swilson.advent.Solver;
 
 import java.util.stream.Collectors;
 
-public class Day01 implements Solver {
+public class Day01 extends Solver {
     public long solvePartOne(String input) {
         var expenses = input.lines()
                 .map(s -> Integer.parseInt(s))

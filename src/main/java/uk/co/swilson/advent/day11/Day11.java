@@ -6,7 +6,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.Arrays;
 import java.util.List;
 
-public class Day11 implements Solver {
+public class Day11 extends Solver {
     private boolean didChange = true;
 
     public long solvePartOne(String input) {

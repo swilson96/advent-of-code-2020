@@ -5,7 +5,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class Day13 implements Solver {
+public class Day13 extends Solver {
     public long solvePartOne(String input) {
         var lines = input.split("\r?\n");
         var departureTime = Integer.parseInt(lines[0]);

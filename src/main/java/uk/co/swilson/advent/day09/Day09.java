@@ -5,7 +5,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class Day09 implements Solver {
+public class Day09 extends Solver {
     private final int preambleSize;
 
     public Day09() {

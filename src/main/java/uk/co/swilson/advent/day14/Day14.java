@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
-public class Day14 implements Solver {
+public class Day14 extends Solver {
     private static final Pattern MEM_ALLOC = Pattern.compile("mem\\[(\\d+)\\] = (\\d+)");
 
     public long solvePartOne(String input) {

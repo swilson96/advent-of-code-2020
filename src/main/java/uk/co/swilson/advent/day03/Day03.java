@@ -6,7 +6,7 @@ import uk.co.swilson.advent.Solver;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Day03 implements Solver {
+public class Day03 extends Solver {
 
     private int checkSlope(String input, int slopeRight, int slopeDown) {
         var lines = input.lines().collect(Collectors.toList());

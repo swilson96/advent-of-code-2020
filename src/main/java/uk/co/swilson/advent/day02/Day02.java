@@ -2,7 +2,7 @@ package uk.co.swilson.advent.day02;
 
 import uk.co.swilson.advent.Solver;
 
-public class Day02 implements Solver {
+public class Day02 extends Solver {
     public long solvePartOne(String input) {
         return (int) input.lines()
                 .map(s -> s.split(": "))

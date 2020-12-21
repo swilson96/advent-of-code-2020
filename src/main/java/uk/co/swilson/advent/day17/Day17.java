@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Day17 implements Solver {
+public class Day17 extends Solver {
     public long solvePartOne(String input) {
         Set<ConwayCube> initialCubes = parseInput(input);
         PocketDimension dimension = new PocketDimension(initialCubes);

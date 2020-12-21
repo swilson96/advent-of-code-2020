@@ -4,7 +4,7 @@ import uk.co.swilson.advent.Solver;
 
 import java.util.stream.Collectors;
 
-public class Day05 implements Solver {
+public class Day05 extends Solver {
     public long solvePartOne(String input) {
         return input.lines().mapToInt(this::seatID).max().orElse(-1);
     }
