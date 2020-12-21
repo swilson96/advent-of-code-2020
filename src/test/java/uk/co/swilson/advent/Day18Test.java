@@ -14,6 +14,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 public class Day18Test {
     public static Stream<? extends Arguments> partOneArguments() {
         return Stream.of(
+                Arguments.of("3 * 7 * 9", 189),
                 Arguments.of("1 + 2 * 3 + 4 * 5 + 6", 71),
                 Arguments.of("1 + (2 * 3) + (4 * (5 + 6))", 51),
                 Arguments.of("2 * 3 + (4 * 5)", 26),
@@ -38,7 +39,7 @@ public class Day18Test {
     @MethodSource("partOneArguments")
     public void testPartOne(String input, long expected) {
         var solver = new Day18();
-        var result = solver.evaluate(input);
+        var result = solver.solvePartOne(input);
         AssertionsForClassTypes.assertThat(result).isEqualTo(expected);
     }
 
