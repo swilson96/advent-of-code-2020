@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public class App {
-    private static SolverFactory solverFactory = new SolverFactory();
+    private static final SolverFactory solverFactory = new SolverFactory();
 
     public static void main(String[] args) {
         String day = getDay(args);
@@ -43,10 +43,10 @@ public class App {
             if (now.getDayOfMonth() == 25) {
                 System.out.println("Merry Christmas!");
             } else {
-                System.out.println(String.format(
-                        "Only %d day%s until Christmas!",
+                System.out.printf(
+                        "Only %d day%s until Christmas!%n",
                         25 - now.getDayOfMonth(),
-                        now.getDayOfMonth() == 24 ? "" : "s"));
+                        now.getDayOfMonth() == 24 ? "" : "s");
             }
             return String.format("%02d", now.getDayOfMonth());
         }
