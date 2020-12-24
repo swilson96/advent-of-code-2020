@@ -13,9 +13,19 @@ public class Day24 extends Solver {
         return getBlackTiles(input).size();
     }
 
-    public Vector mapToCanonical(String description) {
+    private Set<Vector> getBlackTiles(String input) {
+        return input.lines()
+                .map(this::mapToCanonical)
+                .collect(Collectors.groupingBy(v -> v, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() % 2 == 1) // Odd number of flips => black face upwards
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+    }
+
+    private Vector mapToCanonical(String description) {
         Vector location = new Vector(0,0);
-        Map<String, Integer> steps = new HashMap<>();
         var iterator = Arrays.stream(description.split("")).iterator();
         while (iterator.hasNext()) {
             var next = iterator.next();
@@ -62,17 +72,6 @@ public class Day24 extends Solver {
         }
 
         return blackTiles.size();
-    }
-
-    private Set<Vector> getBlackTiles(String input) {
-        return input.lines()
-                .map(this::mapToCanonical)
-                .collect(Collectors.groupingBy(v -> v, Collectors.counting()))
-                .entrySet()
-                .stream()
-                .filter(e -> e.getValue() % 2 == 1) // Odd number of flips => black face upwards
-                .map(e -> e.getKey())
-                .collect(Collectors.toSet());
     }
 
     private Stream<Vector> getNeighbours(Vector tile) {
