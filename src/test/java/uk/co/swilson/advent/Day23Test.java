@@ -26,6 +26,6 @@ public class Day23Test {
     public void partTwoExample() {
         var solver = new Day23();
         var result = solver.solvePartTwo(EXAMPLE_INPUT);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(149245887792L);
     }
 }
