@@ -1,13 +1,9 @@
 package uk.co.swilson.advent;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import uk.co.swilson.advent.day24.Day24;
 
-import java.util.stream.Stream;
+import java.io.InputStream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -41,9 +37,18 @@ public class Day24Test {
     }
 
     @Test
+    public void realThing() throws Exception {
+        var solver = new Day24();
+        InputStream is = Day24.class.getClassLoader().getResourceAsStream("input24.txt");
+        var input = new String(is.readAllBytes());
+        var result = solver.solvePartOne(input);
+        assertThat(result).isEqualTo(488);
+    }
+
+    @Test
     public void partTwoExample() {
         var solver = new Day24();
         var result = solver.solvePartTwo(EXAMPLE_INPUT);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(2208);
     }
 }

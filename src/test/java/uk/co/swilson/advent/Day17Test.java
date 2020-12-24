@@ -22,7 +22,7 @@ public class Day17Test {
     @Test
     public void partOneIsRight() throws Exception {
         var solver = new Day17();
-        InputStream is  = Day17.class.getClassLoader().getResourceAsStream("input17.txt");
+        InputStream is = Day17.class.getClassLoader().getResourceAsStream("input17.txt");
         var input = new String(is.readAllBytes());
         var result = solver.solvePartOne(input);
         assertThat(result).isEqualTo(310);

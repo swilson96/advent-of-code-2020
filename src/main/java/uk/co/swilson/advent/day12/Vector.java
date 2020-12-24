@@ -51,6 +51,24 @@ public class Vector {
         return result.add(about);
     }
 
+    @Override
+    public int hashCode() {
+        return x + 997 * y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof Vector)) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        var otherVector = (Vector) obj;
+        return otherVector.x == x && otherVector.y == y;
+    }
+
+    @Override
     public String toString() {
         return String.format("(%d, %d)", x, y);
     }
