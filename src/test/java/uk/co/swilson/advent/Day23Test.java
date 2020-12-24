@@ -23,6 +23,20 @@ public class Day23Test {
     }
 
     @Test
+    public void partTwoWorksForPartOneExample() {
+        var solver = new Day23();
+        var result = solver.partTwoInner(EXAMPLE_INPUT, 9, 100);
+        assertThat(result).isEqualTo(6 * 7);
+    }
+
+    @Test
+    public void partTwoWorksForPartOneRealThing() {
+        var solver = new Day23();
+        var result = solver.partTwoInner("459672813", 9, 100);
+        assertThat(result).isEqualTo(6 * 8);
+    }
+
+    @Test
     public void partTwoExample() {
         var solver = new Day23();
         var result = solver.solvePartTwo(EXAMPLE_INPUT);
