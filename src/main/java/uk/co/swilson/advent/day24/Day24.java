@@ -53,15 +53,11 @@ public class Day24 extends Solver {
                     .entrySet()
                     .stream()
                     .collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.mapping(Map.Entry::getKey, Collectors.toSet())));
-            var whiteTilesWithTwoBlackNeighbours = Sets.difference(
-                    tilesByNumberOfBlackNeighbours.computeIfAbsent(2L, k -> Collections.emptySet()),
-                    blackTiles);
-            var blackTilesWhichStayBlack = Sets.intersection(
+            var tilesWithTwoBlackNeighbours = tilesByNumberOfBlackNeighbours.computeIfAbsent(2L, k -> Collections.emptySet());
+            var blackTilesWithOneBlackNeighbour = Sets.intersection(
                     blackTiles,
-                    Sets.union(
-                            tilesByNumberOfBlackNeighbours.computeIfAbsent(1L, k -> Collections.emptySet()),
-                            tilesByNumberOfBlackNeighbours.computeIfAbsent(2L, k -> Collections.emptySet())));
-            blackTiles = Sets.union(whiteTilesWithTwoBlackNeighbours, blackTilesWhichStayBlack);
+                    tilesByNumberOfBlackNeighbours.computeIfAbsent(1L, k -> Collections.emptySet()));
+            blackTiles = Sets.union(tilesWithTwoBlackNeighbours, blackTilesWithOneBlackNeighbour);
             System.out.println("Day " + day + ": " + blackTiles.size() + " black tiles");
         }
 
