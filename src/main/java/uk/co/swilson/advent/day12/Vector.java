@@ -58,7 +58,7 @@ public class Vector {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof Vector)) {
+        if (!(obj instanceof Vector)) {
             return false;
         }
         if (obj == this) {
